@@ -50,7 +50,7 @@ CREATE TABLE sakilaOlap.dimStore (
 
 DROP TABLE IF EXISTS sakilaOlap.factRental;
 CREATE TABLE sakilaOlap.factRental (
-	rental_id int not null,
+	rental_id int not null AUTO_INCREMENT,
     customer_id int,
 	tiempo_id int,
 	film_id int,

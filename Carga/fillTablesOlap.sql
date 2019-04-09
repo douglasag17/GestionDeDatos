@@ -120,20 +120,43 @@ DROP PROCEDURE IF EXISTS fill_table_factRental;
 delimiter //
   create procedure fill_table_factRental()
       BEGIN
-            insert into factRental	
-                (
-					rental_id,
-                    customer_id,
-                    tiempo_id,
-                    film_id,
-                    store_id,
-                    cantidad_rentas_dia,
-                    cantidad_rentas_mes
-                )
-                
-                ;
-                
-       END//
+        declare finished INTEGER DEFAULT 0;
+        declare id_customer smallint;
+        declare date_rental datetime;
+        declare id_time int;
+        declare id_store tinyint;
+        declare id_film int;
+        declare cantidad_rentas_mes int;
+        declare cantidad_rentas_dias int;
+        declare cursor1 CURSOR FOR SELECT customer_id,rental_date,store_id,film_id
+                FROM sakila.rental
+                inner JOIN sakila.inventory on inventory.inventory_id = rental.rental_id;
+        declare CONTINUE HANDLER FOR NOT FOUND SET finished = 1;
+        open cursor1;
+        get_rental:loop
+            fetch cursor1 into id_customer,date_rental,id_store,id_film;
+                if finished = 1 then 
+                    leave get_rental;
+                end if;   
+            select tiempo_id from dimTime where dimTime.fecha = date_rental limit 1 into id_time ;
+            insert into sakilaOlap.factRental(
+                customer_id ,
+	            tiempo_id,
+	            film_id ,
+                store_id ,
+                cantidad_rentas_dia,
+                cantidad_rentas_mes
+            )value(
+                id_customer,
+                id_time,
+                id_film,
+                id_store,
+                0,
+                0
+            );
+        end loop get_rental;
+        close cursor1;          
+      END//
    delimiter ;
        
 call fill_table_factRental();
