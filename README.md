@@ -7,7 +7,7 @@ Realizado por:
 - Sebastian Ospina Cabarcas
 
 Documentacion proceso ETL sobre la base de datos Sakila
-
+![Screenshot](sakila.png)
 
 
 # Extracción
@@ -26,6 +26,7 @@ Documentacion proceso ETL sobre la base de datos Sakila
 10. ¿Cual es el cliente más fiel (mayor número de rentas por mes)?
 
 #### Modelo OLAP
+![Screenshot](modeloOlap.png)
 
 #### Reglas de Transformacion
 
