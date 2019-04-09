@@ -11,6 +11,23 @@ Documentacion proceso ETL sobre la base de datos Sakila
 
 
 # Extracción
+Se tiene un archivo de formato JSON con datos semi-estructurados de diferentes paises, el objetivo es extraer los datos de este archivo y complementar la tabla country de sakila
+
+Primero definimos el "que", que es lo que se va a hacer para poder "unificar" ambas estructuras.
+
+1. Entender como funcionan las estructuras
+2. Entender las fuentes
+3. Extraerla
+4. Transformar de json a una tabla
+5. Comparar y complementarlas
+6. Unificar
+7. Agregar tabla a sakila
+
+Para llevar a cabo lo anterior creamos un pequeño script en python utilizando la libreria pandas
+- [extraccion.py](https://github.com/douglasag17/GestionDeDatos/blob/master/Extraccion/extraccion.py)
+
+Consultas para unificar y crear una sola tabla country, consultas sobre agregaciones y vistas
+- [extraccion.sql](https://github.com/douglasag17/GestionDeDatos/blob/master/Extraccion/extraccion.sql)
 
 # Transformación
 #### Preguntas del negocio:
@@ -29,5 +46,10 @@ Documentacion proceso ETL sobre la base de datos Sakila
 ![Screenshot](modeloOlap.jpg)
 
 #### Reglas de Transformacion
+Creamos el esquema de la nueva base de datos sakilaOlap
+- [Esquema](https://github.com/douglasag17/GestionDeDatos/blob/master/Transformacion/schemaOlap.sql)
+
+Procedures para llenar las tablas de dimension y hechos
+- [Procedures](https://github.com/douglasag17/GestionDeDatos/blob/master/Transformacion/fillTablesOlap.sql)
 
 # Carga
