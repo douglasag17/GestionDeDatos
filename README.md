@@ -6,7 +6,7 @@ Realizado por:
 - Julian Andres Sanchez
 - Sebastian Ospina Cabarcas
 
-Documentacion proceso ETL sobre la base de datos Sakila
+Documentacion proceso ETL sobre la base de datos relacional Sakila
 ![Screenshot](sakila.png)
 
 
@@ -30,6 +30,7 @@ Consultas para unificar y crear una sola tabla country, consultas sobre agregaci
 - [extraccion.sql](https://github.com/douglasag17/GestionDeDatos/blob/master/Extraccion/extraccion.sql)
 
 # Transformación
+
 #### Preguntas del negocio:
 1. ¿Cuál fue el cliente que más rentó por mes en el año 2006?
 2. ¿Cuál fue el genero de pelicula mas rentado en los meses de octubre de cada año?
@@ -42,14 +43,19 @@ Consultas para unificar y crear una sola tabla country, consultas sobre agregaci
 9. ¿Qué tienda ha tenido el mayor número de rentas en el último año?
 10. ¿Cual es el cliente más fiel (mayor número de rentas por mes)?
 
-#### Modelo OLAP
-![Screenshot](modeloOlap.jpg)
-
-#### Reglas de Transformacion
-Creamos el esquema de la nueva base de datos sakilaOlap
-- [Esquema](https://github.com/douglasag17/GestionDeDatos/blob/master/Transformacion/schemaOlap.sql)
-
-Procedures para llenar las tablas de dimension y hechos
-- [Procedures](https://github.com/douglasag17/GestionDeDatos/blob/master/Transformacion/fillTablesOlap.sql)
+#### Reglas de transformacion
+- 
+-
+-
+-
 
 # Carga
+
+#### Modelo OLAP
+![Screenshot](modeloOlap.jpg)
+ 
+Creamos el esquema de la nueva base de datos sakilaOlap
+- [Esquema](https://github.com/douglasag17/GestionDeDatos/blob/master/Carga/schemaOlap.sql)
+
+Procedures para llenar las tablas de dimension y hechos
+- [Procedures](https://github.com/douglasag17/GestionDeDatos/blob/master/Carga/fillTablesOlap.sql)
