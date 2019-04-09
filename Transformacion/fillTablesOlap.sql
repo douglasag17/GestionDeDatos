@@ -116,4 +116,24 @@ delimiter //
 call fill_table_dimFilm();
 
 -- Hecho Rental
-
+DROP PROCEDURE IF EXISTS fill_table_factRental;
+delimiter //
+  create procedure fill_table_factRental()
+      BEGIN
+            insert into factRental	
+                (
+					rental_id,
+                    customer_id,
+                    tiempo_id,
+                    film_id,
+                    store_id,
+                    cantidad_rentas_dia,
+                    cantidad_rentas_mes
+                )
+                
+                ;
+                
+       END//
+   delimiter ;
+       
+call fill_table_factRental();
