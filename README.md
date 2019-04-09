@@ -26,7 +26,7 @@ Documentacion proceso ETL sobre la base de datos Sakila
 10. ¿Cual es el cliente más fiel (mayor número de rentas por mes)?
 
 #### Modelo OLAP
-![Screenshot](modeloOlap.png)
+![Screenshot](modeloOlap.jpg)
 
 #### Reglas de Transformacion
 
