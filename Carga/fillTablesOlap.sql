@@ -126,34 +126,81 @@ delimiter //
         declare id_time int;
         declare id_store tinyint;
         declare id_film int;
-        declare cantidad_rentas_mes int;
-        declare cantidad_rentas_dias int;
+        declare cantidad_rentas_mes  int DEFAULT 0;
+        declare cantidad_rentas_dias int DEFAULT 0;
+        declare _day int DEFAULT -1;
+        declare _month int DEFAULT -1;
+        declare _year int DEFAULT -1; 
+        declare current_customer_id int DEFAULT -1;
+        declare aux_day int;
+        declare aux_month int;
+        declare aux_year int;
         declare cursor1 CURSOR FOR SELECT customer_id,rental_date,store_id,film_id
                 FROM sakila.rental
-                inner JOIN sakila.inventory on inventory.inventory_id = rental.rental_id;
+                inner JOIN sakila.inventory on inventory.inventory_id = rental.rental_id order by customer_id,rental_date;
         declare CONTINUE HANDLER FOR NOT FOUND SET finished = 1;
         open cursor1;
         get_rental:loop
             fetch cursor1 into id_customer,date_rental,id_store,id_film;
                 if finished = 1 then 
                     leave get_rental;
-                end if;   
-            select tiempo_id from dimTime where dimTime.fecha = date_rental limit 1 into id_time ;
-            insert into sakilaOlap.factRental(
-                customer_id ,
-	            tiempo_id,
-	            film_id ,
-                store_id ,
-                cantidad_rentas_dia,
-                cantidad_rentas_mes
-            )value(
-                id_customer,
-                id_time,
-                id_film,
-                id_store,
-                0,
-                0
-            );
+                end if;
+
+                if _day = -1 And _month = -1 And _year = -1 And current_customer_id = -1 then
+                    set current_customer_id = id_customer;
+                    set _day = day(date_rental);
+                    set _month = month(date_rental);
+                    set _year = year(date_rental);
+                end if;
+
+                set aux_day =  day(date_rental);
+                set aux_month = month(date_rental);
+                set aux_year = year(date_rental);
+
+                if id_customer <> current_customer_id then
+                    set current_customer_id = id_customer;
+                    set _day = day(date_rental);
+                    set _month = month(date_rental);
+                    set _year = year(date_rental);
+                end if;
+
+                if _year <> aux_year then
+                    set cantidad_rentas_dias = 0;
+                    set cantidad_rentas_mes  = 0;
+                    set _year = aux_year;
+                end if;
+
+                if _day <> aux_day then
+                    set _day = aux_day;
+                    set cantidad_rentas_dias = 0;
+                end if;
+
+                if _month <> aux_month then
+                    set _month = aux_month;
+                    set cantidad_rentas_dias = 0;
+                    set cantidad_rentas_mes  = 0;   
+                end if;
+                
+                set cantidad_rentas_dias = cantidad_rentas_dias + 1;
+                set cantidad_rentas_mes = cantidad_rentas_mes + 1;
+
+                select tiempo_id from dimTime where dimTime.fecha = date_rental limit 1 into id_time ;
+                insert into sakilaOlap.factRental(
+                    customer_id ,
+	                tiempo_id,
+	                film_id ,
+                    store_id ,
+                    cantidad_rentas_dia,
+                    cantidad_rentas_mes
+                )value(
+                    id_customer,
+                    id_time,
+                    id_film,
+                    id_store,
+                    cantidad_rentas_dias,
+                    cantidad_rentas_mes
+                );
+
         end loop get_rental;
         close cursor1;          
       END//
