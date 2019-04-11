@@ -137,7 +137,8 @@ delimiter //
         declare aux_year int;
         declare cursor1 CURSOR FOR SELECT customer_id,rental_date,store_id,film_id
                 FROM sakila.rental
-                inner JOIN sakila.inventory on inventory.inventory_id = rental.rental_id order by customer_id,rental_date;
+                inner JOIN sakila.inventory on inventory.inventory_id = rental.inventory_id 
+                order by customer_id,rental_date;
         declare CONTINUE HANDLER FOR NOT FOUND SET finished = 1;
         open cursor1;
         get_rental:loop
@@ -162,6 +163,8 @@ delimiter //
                     set _day = day(date_rental);
                     set _month = month(date_rental);
                     set _year = year(date_rental);
+                    set cantidad_rentas_dias = 0;
+                    set cantidad_rentas_mes  = 0;
                 end if;
 
                 if _year <> aux_year then
