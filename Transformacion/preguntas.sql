@@ -1,11 +1,13 @@
 -- 1. ¿Cuál fue el cliente que más rentó por mes en el año 2006?
 
 -- 2. ¿Cuál fue el genero de pelicula mas rentado en los meses de octubre de cada año?
-SELECT f.name_category, COUNT(r.rental_id) as cantidasRentadas, t.año as year, t.mes AS month
+SELECT f.name_category, COUNT(r.rental_id) as cantidasRentadas, 
+	t.año as year, t.mes AS month
 FROM sakilaOlap.factRental r
 JOIN sakilaOlap.dimFilm f ON f.film_id = r.film_id
 JOIN sakilaOlap.dimTime t ON t.tiempo_id = r.tiempo_id
 GROUP BY f.name_category, year, month
+HAVING month = '8'
 ORDER BY cantidasRentadas DESC;
 
 -- 3. ¿Cual es el rental_rate de las películas top más rentadas en los últimos 2 años?
