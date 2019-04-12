@@ -44,10 +44,11 @@ Consultas para unificar y crear una sola tabla country, consultas sobre agregaci
 10. ¿Cual es el cliente más fiel (mayor número de rentas por mes)?
 
 #### Reglas de transformacion
-- 
--
--
--
+- De la tabla customer tomamos tal cual los siguientes campos para construir la dimension dimCustomer y asi poder responder las preguntas del negocio planteadas anteriormente: customer_id first_name, last_name, email. Y desnormalizamos las tablas address, city y country, para asi obtener los siguientes campos: address_cus, city_cus, country_cus y district_cus.
+- De la tabla store tomamos tal cual el campo de store_id para construir la dimension dimStore y desnormalizamos las tablas address, city y country, para asi obtener los siguientes campos: address_store, city_store, country_store y district_store.
+- De la tabla film tomamos tal cual los siguientes campos para construir la dimension dimFilm y asi poder responder las preguntas del negocio planteadas anteriormente: film_id, title y rental_rate. Y desnormalizamos las tablas category y language, para asi obtener los siguientes campos: name_category y name_language.
+- Creamos la dimension tiempo a partir del campo rental_date de la tabla rental y obtuvimos los siguientes campos: fecha, año, dia, mes, semana_del_año, dia_del_años, hora, minuto, segundo, semestre, bimestre, trimestre.
+- Para la tabla de hechos factRental se calcularon los siguientes campos cantidad_rentas_dia, cantidad_rentas_mes.
 
 # Carga
 
