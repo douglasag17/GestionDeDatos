@@ -7,7 +7,7 @@ Realizado por:
 - Sebastian Ospina Cabarcas
 
 Documentacion proceso ETL sobre la base de datos relacional Sakila
-![Screenshot](sakila.png)
+![Screenshot](sakilaModelo.svg)
 
 
 # Extracción
@@ -53,7 +53,7 @@ Consultas para unificar y crear una sola tabla country, consultas sobre agregaci
 # Carga
 
 #### Modelo OLAP
-![Screenshot](modeloOlap.jpg)
+![Screenshot](OlapModelo.jpg)
  
 Creamos el esquema de la nueva base de datos sakilaOlap
 - [Esquema](https://github.com/douglasag17/GestionDeDatos/blob/master/Carga/schemaOlap.sql)
