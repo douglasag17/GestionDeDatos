@@ -56,7 +56,7 @@ Consultas para unificar y crear una sola tabla country, consultas sobre agregaci
 ![Screenshot](OlapModelo.jpg)
  
 Creamos el esquema de la nueva base de datos sakilaOlap
-- [Esquema](https://github.com/douglasag17/GestionDeDatos/blob/master/Carga/schemaOlap.sql)
+- [Esquema](https://github.com/douglasag17/GestionDeDatos/blob/master/Transformacion/schemaOlap.sql)
 
 Procedures para llenar las tablas de dimension y hechos
 - [Procedures](https://github.com/douglasag17/GestionDeDatos/blob/master/Carga/fillTablesOlap.sql)
