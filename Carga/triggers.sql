@@ -95,7 +95,7 @@ DELIMITER ;
 DROP TRIGGER IF EXISTS fill_table_dimFilm;
 
 DELIMITER //
-CREATE TRIGGER fill_table_dimFilm AFTER INSERT ON store
+CREATE TRIGGER fill_table_dimFilm AFTER INSERT ON film
 for each row
 BEGIN
     INSERT INTO sakilaOLap.dimFilm
